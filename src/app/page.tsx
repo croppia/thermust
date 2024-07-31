@@ -178,7 +178,7 @@ function PiggyBankIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function ThermometerIcon(props) {
+function ThermometerIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -197,7 +197,7 @@ function ThermometerIcon(props) {
   );
 }
 
-function XIcon(props) {
+function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
