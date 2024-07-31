@@ -26,24 +26,24 @@ export default function Component() {
             <div className="grid grid-cols-3 gap-4">
               <Button
                 variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center gap-3 p-3"
+                size="lg"
+                className="flex flex-col items-center justify-center gap-3"
               >
                 <MilkIcon className="w-6 h-6" />
                 Beef
               </Button>
               <Button
                 variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center gap-3 p-3"
+                size="lg"
+                className="flex flex-col items-center justify-center gap-3"
               >
                 <BirdIcon className="w-6 h-6" />
                 Chicken
               </Button>
               <Button
                 variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center gap-3 p-3"
+                size="lg"
+                className="flex flex-col items-center justify-center gap-3"
               >
                 <PiggyBankIcon className="w-6 h-6" />
                 Pork
@@ -85,16 +85,16 @@ export default function Component() {
             <div className="grid grid-cols-2 gap-4">
               <Button
                 variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center gap-3 p-3"
+                size="lg"
+                className="flex flex-col items-center justify-center gap-3"
               >
                 <ThermometerIcon className="w-6 h-6" />
                 Celsius
               </Button>
               <Button
                 variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center gap-3 p-3"
+                size="lg"
+                className="flex flex-col items-center justify-center gap-3"
               >
                 <ThermometerIcon className="w-6 h-6" />
                 Fahrenheit
@@ -112,7 +112,7 @@ export default function Component() {
   );
 }
 
-function BirdIcon(props) {
+function BirdIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -136,7 +136,7 @@ function BirdIcon(props) {
   );
 }
 
-function MilkIcon(props) {
+function MilkIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -157,7 +157,7 @@ function MilkIcon(props) {
   );
 }
 
-function PiggyBankIcon(props) {
+function PiggyBankIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
