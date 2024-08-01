@@ -4,6 +4,7 @@ import { DM_Sans } from "next/font/google";
 import { Space_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import SeoHead from "@/components/seoHead";
 
 const fontHeading = DM_Sans({
   subsets: ["latin"],
@@ -21,6 +22,12 @@ const fontBody = Space_Mono({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <SeoHead
+        title="Thermust - Smart Temperature Management"
+        siteName="Thermust.com"
+        description="Find out the safe temperature for your meat"
+        url="https://thermust.com"
+      />
       <body
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >

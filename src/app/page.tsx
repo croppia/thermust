@@ -5,6 +5,12 @@
  */
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  BeefIcon,
+  DrumstickIcon,
+  PiggyBank,
+  ThermometerIcon,
+} from "lucide-react";
 
 export default function Component() {
   return (
@@ -25,27 +31,27 @@ export default function Component() {
             </Label>
             <div className="grid grid-cols-3 gap-4">
               <Button
-                variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                variant="default"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
-                <MilkIcon className="w-6 h-6" />
+                <BeefIcon className="w-8 h-8" />
                 Beef
               </Button>
               <Button
                 variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
-                <BirdIcon className="w-6 h-6" />
+                <DrumstickIcon className="w-8 h-8" />
                 Chicken
               </Button>
               <Button
                 variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
-                <PiggyBankIcon className="w-6 h-6" />
+                <PiggyBank className="w-8 h-8" />
                 Pork
               </Button>
             </div>
@@ -57,22 +63,22 @@ export default function Component() {
             <div className="grid grid-cols-3 gap-4">
               <Button
                 variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
                 Ground
               </Button>
               <Button
-                variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                variant="default"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
                 Steak
               </Button>
               <Button
                 variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
                 Stew
               </Button>
@@ -85,134 +91,29 @@ export default function Component() {
             <div className="grid grid-cols-2 gap-4">
               <Button
                 variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
-                <ThermometerIcon className="w-6 h-6" />
+                <ThermometerIcon className="w-8 h-8" />
                 Celsius
               </Button>
               <Button
-                variant="outline"
-                size="lg"
-                className="flex flex-col items-center justify-center gap-3"
+                variant="default"
+                size="xl"
+                className="flex flex-col items-center justify-center"
               >
-                <ThermometerIcon className="w-6 h-6" />
+                <ThermometerIcon className="w-8 h-8" />
                 Fahrenheit
               </Button>
             </div>
           </div>
           <div className="text-center">
-            <Button size="lg" className="w-full">
+            <Button size="xl" variant="destructive" className="w-full">
               Get Recommended Temperature
             </Button>
           </div>
         </div>
       </div>
     </div>
-  );
-}
-
-function BirdIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 7h.01" />
-      <path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20" />
-      <path d="m20 7 2 .5-2 .5" />
-      <path d="M10 18v3" />
-      <path d="M14 17.75V21" />
-      <path d="M7 18a6 6 0 0 0 3.84-10.61" />
-    </svg>
-  );
-}
-
-function MilkIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2h8" />
-      <path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2" />
-      <path d="M7 15a6.472 6.472 0 0 1 5 0 6.47 6.47 0 0 0 5 0" />
-    </svg>
-  );
-}
-
-function PiggyBankIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5z" />
-      <path d="M2 9v1c0 1.1.9 2 2 2h1" />
-      <path d="M16 11h0" />
-    </svg>
-  );
-}
-
-function ThermometerIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
-    </svg>
-  );
-}
-
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
   );
 }
