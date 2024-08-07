@@ -5,6 +5,7 @@ import { Space_Mono } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import SeoHead from "@/components/seoHead";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 const fontHeading = DM_Sans({
   subsets: ["latin"],
@@ -28,11 +29,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         description="Find out the safe temperature for your meat"
         url="https://thermust.com"
       />
-      <body
-        className={cn("antialiased", fontHeading.variable, fontBody.variable)}
-      >
-        {children}
-      </body>
+      <AnalyticsProvider>
+        <body
+          className={cn("antialiased", fontHeading.variable, fontBody.variable)}
+        >
+          {children}
+        </body>
+      </AnalyticsProvider>
     </html>
   );
 }
