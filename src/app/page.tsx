@@ -1,28 +1,66 @@
+"use client";
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/jxvGM8JoNoi
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+import { useCallback, useMemo, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {
-  BeefIcon,
-  DrumstickIcon,
-  PiggyBank,
-  ThermometerIcon,
-} from "lucide-react";
+import { MeatButton } from "@/components/MeatButton";
+import { MeatCutButton } from "@/components/CutButton";
+import { CookingMethod, MeatType, TemperatureUnit } from "@/lib/types";
+import { safeTemperatures } from "@/lib/temps";
+import { ThermometerIcon } from "lucide-react";
+import { convertFarenheitToCelsius } from "@/lib/converter";
 
 export default function Component() {
+  const [selectedMeat, setSelectedMeat] = useState<MeatType>(MeatType.beef);
+  const [selectedCut, setSelectedCut] = useState<string>(CookingMethod.steak);
+  const [selectedUnit, setSelectedUnit] = useState<TemperatureUnit>(
+    TemperatureUnit.fahrenheit
+  );
+
+  const handleSetMeat = useCallback(
+    (meat: MeatType) => {
+      setSelectedMeat(meat);
+      if (
+        selectedCut &&
+        !Object.keys(safeTemperatures[meat]).includes(selectedCut)
+      ) {
+        setSelectedCut(Object.keys(safeTemperatures[meat])[0]);
+      }
+    },
+    [selectedCut]
+  );
+
+  const recommendedTemp = useMemo(() => {
+    if (selectedUnit === TemperatureUnit.celsius) {
+      return {
+        temperature: convertFarenheitToCelsius(
+          safeTemperatures[selectedMeat][selectedCut].temperature
+        ),
+        label: safeTemperatures[selectedMeat][selectedCut].label,
+      };
+    }
+    return safeTemperatures[selectedMeat][selectedCut];
+  }, [selectedMeat, selectedCut, selectedUnit]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-muted dark:bg-background">
       <div className="max-w-md w-full px-6 py-10 bg-card dark:bg-card rounded-lg shadow-lg">
-        <h2 className="text-center text-2xl font-bold mb-6 text-primary-foreground dark:text-primary-foreground">
-          Safe temperature
+        <h3 className="text-center text-lg font-bold text-primary-foreground dark:text-primary-foreground">
+          What temperature to cook
+        </h3>
+        <h2 className="text-center text-2xl font-bold mb-4 text-primary-foreground dark:text-primary-foreground">
+          <span className="italic">{recommendedTemp.label}</span>
         </h2>
         <div className="text-center pb-8">
           <p className="text-4xl font-bold text-primary-foreground dark:text-primary-foreground">
-            160°F
+            {recommendedTemp.temperature}°
+            {selectedUnit === TemperatureUnit.celsius ? "C" : "F"}
           </p>
+          <p className="text-sm text-muted-foreground">Internal temperature</p>
         </div>
         <div className="space-y-8">
           <div>
@@ -30,30 +68,14 @@ export default function Component() {
               Select Meat Type
             </Label>
             <div className="grid grid-cols-3 gap-4">
-              <Button
-                variant="default"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                <BeefIcon className="w-8 h-8" />
-                Beef
-              </Button>
-              <Button
-                variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                <DrumstickIcon className="w-8 h-8" />
-                Chicken
-              </Button>
-              <Button
-                variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                <PiggyBank className="w-8 h-8" />
-                Pork
-              </Button>
+              {Object.values(MeatType).map((meat) => (
+                <MeatButton
+                  key={meat}
+                  meat={meat}
+                  isSelected={selectedMeat === meat}
+                  onClick={() => handleSetMeat(meat)}
+                />
+              ))}
             </div>
           </div>
           <div>
@@ -61,27 +83,14 @@ export default function Component() {
               Select Meat Cut
             </Label>
             <div className="grid grid-cols-3 gap-4">
-              <Button
-                variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                Ground
-              </Button>
-              <Button
-                variant="default"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                Steak
-              </Button>
-              <Button
-                variant="outline"
-                size="xl"
-                className="flex flex-col items-center justify-center"
-              >
-                Stew
-              </Button>
+              {Object.keys(safeTemperatures[selectedMeat]).map((cut) => (
+                <MeatCutButton
+                  key={cut}
+                  cut={cut}
+                  selected={selectedCut === cut}
+                  onClick={() => setSelectedCut(cut)}
+                />
+              ))}
             </div>
           </div>
           <div>
@@ -90,27 +99,38 @@ export default function Component() {
             </Label>
             <div className="grid grid-cols-2 gap-4">
               <Button
-                variant="outline"
+                variant={
+                  selectedUnit === TemperatureUnit.fahrenheit
+                    ? "outline"
+                    : "default"
+                }
                 size="xl"
                 className="flex flex-col items-center justify-center"
+                onClick={() => setSelectedUnit(TemperatureUnit.fahrenheit)}
               >
                 <ThermometerIcon className="w-8 h-8" />
-                Celsius
+                {TemperatureUnit.fahrenheit}
               </Button>
               <Button
-                variant="default"
+                variant={
+                  selectedUnit === TemperatureUnit.celsius
+                    ? "outline"
+                    : "default"
+                }
                 size="xl"
                 className="flex flex-col items-center justify-center"
+                onClick={() => setSelectedUnit(TemperatureUnit.celsius)}
               >
                 <ThermometerIcon className="w-8 h-8" />
-                Fahrenheit
+                {TemperatureUnit.celsius}
               </Button>
             </div>
           </div>
           <div className="text-center">
-            <Button size="xl" variant="destructive" className="w-full">
-              Get Recommended Temperature
-            </Button>
+            <p className="text-xs text-muted-foreground">
+              Reference: Cook: Heat it Up Chart.Partnership for Food Safety
+              Education. May 2011.
+            </p>
           </div>
         </div>
       </div>
