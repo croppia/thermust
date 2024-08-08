@@ -1,6 +1,6 @@
 # Thermust
 
-Thermust is a web app that helps you find the safest temperature for your meat.
+Thermust is a web app that helps you find the safest temperature when cooking any type of meat.
 
 Visit [thermust.com](https://thermust.com) to use the app.
 
