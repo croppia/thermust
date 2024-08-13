@@ -134,6 +134,15 @@ export default function Component() {
           </div>
         </div>
       </div>
+      <div className="text-center text-xs text-muted-foreground mt-4">
+        Build with ❤️ by{" "}
+        <a href="https://twitter.com/jvivas_official">J Vivas</a> <br />
+        <a href="https://github.com/croppia/thermust">Source Code</a> <br />I{" "}
+        <a href="https://www.yorch.co/all-food-tech-ideas-i-failed-to-build-in-the-last-10-years/">
+          build tools for chefs and foodies
+        </a>
+        .
+      </div>
     </div>
   );
 }
