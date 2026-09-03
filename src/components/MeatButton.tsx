@@ -18,6 +18,8 @@ export function MeatButton({
       size="xl"
       className="flex flex-col items-center justify-center"
       onClick={onClick}
+      aria-pressed={isSelected}
+      type="button"
     >
       {React.createElement(meatIcons[meat])}
       {meat}

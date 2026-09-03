@@ -1,16 +1,32 @@
 "use client";
+
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 
-if (typeof window !== "undefined") {
-  const key = process.env.NEXT_PUBLIC_POSTHOG_KEY || "";
-  const host = process.env.NEXT_PUBLIC_POSTHOG_HOST || "";
+const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
+const analyticsConfigured = Boolean(posthogKey && posthogHost);
 
-  posthog.init(key, {
-    api_host: host,
+if (typeof window !== "undefined" && analyticsConfigured) {
+  posthog.init(posthogKey!, {
+    api_host: posthogHost,
+    capture_pageview: true,
+    capture_pageleave: true,
   });
 }
 
+export function captureProductEvent(
+  event: string,
+  properties: Record<string, string>
+): void {
+  if (analyticsConfigured) {
+    posthog.capture(event, properties);
+  }
+}
+
 export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+  if (!analyticsConfigured) {
+    return children;
+  }
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }

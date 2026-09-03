@@ -1,41 +1,45 @@
-// This is the root layout component for your Next.js app.
-// Learn more: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
-import { DM_Sans } from "next/font/google";
-import { Space_Mono } from "next/font/google";
-import { cn } from "@/lib/utils";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import SeoHead from "@/components/seoHead";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
-const fontHeading = DM_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-heading",
-});
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.thermust.com"),
+  title: "Thermust — Safe cooking temperatures",
+  description:
+    "Look up current U.S. government minimum cooking temperatures, rest times, and seafood doneness cues.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Thermust",
+    title: "Thermust — Safe cooking temperatures",
+    description:
+      "Minimum cooking temperatures, rest times, and seafood doneness cues.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Thermust — Safe cooking temperatures",
+    description:
+      "Minimum cooking temperatures, rest times, and seafood doneness cues.",
+  },
+  icons: {
+    icon: "/favicon/favicon-32x32.png",
+    apple: "/favicon/apple-icon-180x180.png",
+  },
+};
 
-const fontBody = Space_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-body",
-  weight: "400",
-});
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#9ec1c5",
+};
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <SeoHead
-        title="Thermust - Smart Temperature Management"
-        siteName="Thermust.com"
-        description="Find out the safe temperature for your meat"
-        url="https://thermust.com"
-      />
-      <AnalyticsProvider>
-        <body
-          className={cn("antialiased", fontHeading.variable, fontBody.variable)}
-        >
-          {children}
-        </body>
-      </AnalyticsProvider>
+      <body>
+        <AnalyticsProvider>{children}</AnalyticsProvider>
+      </body>
     </html>
   );
 }

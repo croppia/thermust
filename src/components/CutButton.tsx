@@ -6,7 +6,7 @@ export function MeatCutButton({
   selected,
   onClick,
 }: {
-  cut: string;
+  cut: CookingMethod;
   selected: boolean;
   onClick: () => void;
 }) {
@@ -14,8 +14,10 @@ export function MeatCutButton({
     <Button
       variant={selected ? "outline" : "default"}
       size="xl"
-      className="flex flex-col items-center justify-center"
+      className="min-h-11 h-auto whitespace-normal px-3 py-3 text-center leading-tight"
       onClick={onClick}
+      aria-pressed={selected}
+      type="button"
     >
       {cut}
     </Button>

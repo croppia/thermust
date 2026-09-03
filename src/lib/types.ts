@@ -20,6 +20,9 @@ export enum CookingMethod {
   whole = "Whole",
   parts = "Parts",
   leftovers = "Leftovers",
+  egg_dish = "Egg dishes",
+  crustaceans = "Shrimp, lobster, crab, and scallops",
+  bivalves = "Clams, oysters, and mussels",
 }
 
 export enum TemperatureUnit {

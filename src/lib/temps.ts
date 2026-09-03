@@ -1,224 +1,101 @@
-import { MeatType, CookingMethod } from "./types";
+import { CookingMethod, MeatType } from "./types";
 
-export const safeTemperatures: Record<
-  MeatType,
-  Record<string, { temperature: number; label: string }>
-> = {
+export const FOOD_SAFETY_SOURCE = {
+  label: "FoodSafety.gov Safe Minimum Internal Temperature Chart",
+  url: "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+  reviewedAt: "2024-11-21",
+} as const;
+
+export type TemperatureGuidance = {
+  label: string;
+  temperatureF?: number;
+  restMinutes?: number;
+  donenessCue?: string;
+};
+
+type GuidanceByMethod = Partial<Record<CookingMethod, TemperatureGuidance>>;
+
+const leftovers = (label: string): TemperatureGuidance => ({
+  label: `${label} leftovers`,
+  temperatureF: 165,
+});
+
+export const safeTemperatures: Record<MeatType, GuidanceByMethod> = {
   [MeatType.beef]: {
-    [CookingMethod.steak]: {
-      temperature: 160,
-      label: "Beef Steak",
-    },
-    [CookingMethod.roast]: {
-      temperature: 145,
-      label: "Beef Roast",
-    },
-    [CookingMethod.chops]: {
-      temperature: 160,
-      label: "Beef Chops",
-    },
-    [CookingMethod.ground]: {
-      temperature: 160,
-      label: "Ground Beef",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Beef Leftovers",
-    },
+    [CookingMethod.steak]: { label: "Beef steak", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.roast]: { label: "Beef roast", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.chops]: { label: "Beef chops", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.ground]: { label: "Ground beef", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Beef"),
   },
   [MeatType.pork]: {
-    [CookingMethod.steak]: {
-      temperature: 145,
-      label: "Pork Steak",
-    },
-    [CookingMethod.roast]: {
-      temperature: 145,
-      label: "Pork Roast",
-    },
-    [CookingMethod.chops]: {
-      temperature: 145,
-      label: "Pork Chops",
-    },
-    [CookingMethod.ground]: {
-      temperature: 160,
-      label: "Ground Pork",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Pork Leftovers",
-    },
+    [CookingMethod.steak]: { label: "Pork steak", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.roast]: { label: "Pork roast", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.chops]: { label: "Pork chops", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.ground]: { label: "Ground pork", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Pork"),
   },
   [MeatType.chicken]: {
-    [CookingMethod.ground]: {
-      temperature: 165,
-      label: "Ground Chicken",
-    },
-    [CookingMethod.parts]: {
-      temperature: 165,
-      label: "Chicken Parts(Wings, Thighs, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 165,
-      label: "Whole Chicken",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Chicken Leftovers",
-    },
+    [CookingMethod.ground]: { label: "Ground chicken", temperatureF: 165 },
+    [CookingMethod.parts]: { label: "Chicken pieces", temperatureF: 165 },
+    [CookingMethod.whole]: { label: "Whole chicken", temperatureF: 165 },
+    [CookingMethod.leftovers]: leftovers("Chicken"),
   },
   [MeatType.lamb]: {
-    [CookingMethod.steak]: {
-      temperature: 145,
-      label: "Lamb Steak",
-    },
-    [CookingMethod.roast]: {
-      temperature: 145,
-      label: "Lamb Roast",
-    },
-    [CookingMethod.chops]: {
-      temperature: 145,
-      label: "Lamb Chops",
-    },
-    [CookingMethod.ground]: {
-      temperature: 160,
-      label: "Ground Lamb",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Lamb Leftovers",
-    },
+    [CookingMethod.steak]: { label: "Lamb steak", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.roast]: { label: "Lamb roast", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.chops]: { label: "Lamb chops", temperatureF: 145, restMinutes: 3 },
+    [CookingMethod.ground]: { label: "Ground lamb", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Lamb"),
   },
   [MeatType.turkey]: {
-    [CookingMethod.ground]: {
-      temperature: 165,
-      label: "Ground Turkey",
-    },
-    [CookingMethod.parts]: {
-      temperature: 165,
-      label: "Turkey Parts(Wings, Thighs, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 165,
-      label: "Whole Turkey",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Turkey Leftovers",
-    },
+    [CookingMethod.ground]: { label: "Ground turkey", temperatureF: 165 },
+    [CookingMethod.parts]: { label: "Turkey pieces", temperatureF: 165 },
+    [CookingMethod.whole]: { label: "Whole turkey", temperatureF: 165 },
+    [CookingMethod.leftovers]: leftovers("Turkey"),
   },
   [MeatType.fish]: {
-    [CookingMethod.ground]: {
-      temperature: 145,
-      label: "Ground Fish",
-    },
-    [CookingMethod.parts]: {
-      temperature: 145,
-      label: "Fish Parts(Fillets, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 145,
-      label: "Whole Fish",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 145,
-      label: "Fish Leftovers",
-    },
+    [CookingMethod.parts]: { label: "Fish fillet", temperatureF: 145, donenessCue: "Or cook until the flesh is opaque and separates easily with a fork." },
+    [CookingMethod.whole]: { label: "Whole fish", temperatureF: 145, donenessCue: "Or cook until the flesh is opaque and separates easily with a fork." },
+    [CookingMethod.leftovers]: leftovers("Fish"),
   },
   [MeatType.shellfish]: {
-    [CookingMethod.ground]: {
-      temperature: 145,
-      label: "Ground Shellfish",
-    },
-    [CookingMethod.parts]: {
-      temperature: 145,
-      label: "Shellfish Parts(Clams, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 145,
-      label: "Whole Shellfish",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 145,
-      label: "Shellfish Leftovers",
-    },
+    [CookingMethod.crustaceans]: { label: "Shrimp, lobster, crab, or scallops", donenessCue: "Cook until the flesh is pearly or white and opaque." },
+    [CookingMethod.bivalves]: { label: "Clams, oysters, or mussels", donenessCue: "Cook until the shells open; discard any that stay closed." },
+    [CookingMethod.leftovers]: leftovers("Shellfish"),
   },
   [MeatType.game_birds]: {
-    [CookingMethod.ground]: {
-      temperature: 165,
-      label: "Ground Game Birds",
-    },
-    [CookingMethod.parts]: {
-      temperature: 165,
-      label: "Game Birds Parts(Wings, Thighs, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 165,
-      label: "Whole Game Birds",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Game Birds Leftovers",
-    },
+    [CookingMethod.parts]: { label: "Game bird pieces", temperatureF: 165 },
+    [CookingMethod.whole]: { label: "Whole game bird", temperatureF: 165 },
+    [CookingMethod.leftovers]: leftovers("Game bird"),
   },
   [MeatType.game_meat]: {
-    [CookingMethod.steak]: {
-      temperature: 145,
-      label: "Game Meat Steak",
-    },
-    [CookingMethod.roast]: {
-      temperature: 145,
-      label: "Game Meat Roast",
-    },
-    [CookingMethod.chops]: {
-      temperature: 145,
-      label: "Game Meat Chops",
-    },
-    [CookingMethod.ground]: {
-      temperature: 160,
-      label: "Ground Game Meat",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 165,
-      label: "Game Meat Leftovers",
-    },
+    [CookingMethod.steak]: { label: "Venison steak", temperatureF: 160 },
+    [CookingMethod.roast]: { label: "Venison roast", temperatureF: 160 },
+    [CookingMethod.chops]: { label: "Venison chops", temperatureF: 160 },
+    [CookingMethod.ground]: { label: "Ground venison", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Venison"),
   },
   [MeatType.eggs]: {
-    [CookingMethod.whole]: {
-      temperature: 160,
-      label: "Whole Eggs",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 160,
-      label: "Eggs Leftovers",
-    },
+    [CookingMethod.whole]: { label: "Eggs", donenessCue: "Cook until the yolk and white are firm." },
+    [CookingMethod.egg_dish]: { label: "Egg dish", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Egg"),
   },
   [MeatType.rabbit]: {
-    [CookingMethod.ground]: {
-      temperature: 160,
-      label: "Ground Rabbit",
-    },
-    [CookingMethod.parts]: {
-      temperature: 160,
-      label: "Rabbit Parts(Breasts, etc.)",
-    },
-    [CookingMethod.whole]: {
-      temperature: 160,
-      label: "Whole Rabbit",
-    },
-    [CookingMethod.leftovers]: {
-      temperature: 160,
-      label: "Rabbit Leftovers",
-    },
+    [CookingMethod.parts]: { label: "Rabbit pieces", temperatureF: 160 },
+    [CookingMethod.whole]: { label: "Whole rabbit", temperatureF: 160 },
+    [CookingMethod.ground]: { label: "Ground rabbit", temperatureF: 160 },
+    [CookingMethod.leftovers]: leftovers("Rabbit"),
   },
 };
+
+export function cookingMethodsFor(meatType: MeatType): CookingMethod[] {
+  return Object.keys(safeTemperatures[meatType]) as CookingMethod[];
+}
 
 export function getSafeTemperature(
   meatType: MeatType,
   cookingMethod: CookingMethod
-) {
-  if (!safeTemperatures[meatType]) {
-    return 0;
-  }
-
+): TemperatureGuidance | undefined {
   return safeTemperatures[meatType][cookingMethod];
 }
