@@ -1,7 +1,9 @@
 # Thermust
 
 Thermust is a small, static web app for looking up U.S. government safe minimum
-cooking temperatures, required rest times, and seafood doneness cues.
+cooking temperatures, required rest times, and seafood doneness cues. Every
+food and preparation has a canonical page under `/temperatures/`, and the
+temperature unit is shareable through the `?unit=celsius` URL parameter.
 
 Visit [thermust.com](https://thermust.com) to use the app.
 

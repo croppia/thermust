@@ -89,8 +89,14 @@ export const safeTemperatures: Record<MeatType, GuidanceByMethod> = {
   },
 };
 
+const cookingMethods: readonly CookingMethod[] = Object.values(CookingMethod);
+
+function isCookingMethod(value: string): value is CookingMethod {
+  return cookingMethods.some((method) => method === value);
+}
+
 export function cookingMethodsFor(meatType: MeatType): CookingMethod[] {
-  return Object.keys(safeTemperatures[meatType]) as CookingMethod[];
+  return Object.keys(safeTemperatures[meatType]).filter(isCookingMethod);
 }
 
 export function getSafeTemperature(

@@ -4,21 +4,21 @@ import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.thermust.com"),
-  title: "Thermust — Safe cooking temperatures",
+  title: "Safe Internal Cooking Temperature Chart | Thermust",
   description:
-    "Look up current U.S. government minimum cooking temperatures, rest times, and seafood doneness cues.",
+    "Find safe minimum internal cooking temperatures for meat, poultry, fish, shellfish, eggs, leftovers, and more.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: "Thermust",
-    title: "Thermust — Safe cooking temperatures",
+    title: "Safe Internal Cooking Temperature Chart | Thermust",
     description:
       "Minimum cooking temperatures, rest times, and seafood doneness cues.",
   },
   twitter: {
     card: "summary",
-    title: "Thermust — Safe cooking temperatures",
+    title: "Safe Internal Cooking Temperature Chart | Thermust",
     description:
       "Minimum cooking temperatures, rest times, and seafood doneness cues.",
   },
